@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -88,8 +87,7 @@ func run(cliArgs []string) (exitCode, error) {
 	}
 
 	if opts.JSON {
-		buf := bufio.NewWriter(os.Stdout)
-		if err := json.NewEncoder(buf).Encode(results); err != nil {
+		if err := json.NewEncoder(os.Stdout).Encode(results); err != nil {
 			return exitCodeErrJSON, fmt.Errorf("failed to marshalling JSON: %w", err)
 		}
 

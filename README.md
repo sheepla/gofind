@@ -4,7 +4,7 @@ A command line [pkg.go.dev](pkg.go.dev) searcher
 
 ## Usage
 
-Simply specify the keywords in the arguments e.g. `io.Reader`, `json OR yaml` etc.
+Simply specify the keywords in the arguments e.g. package name (`template`), symbol name (`io.Reader`), multiple keywords (`json OR yaml`) etc.
 
 ```
 Usage:
@@ -26,7 +26,7 @@ To see examples of keywords to search for, check [search-help](https://pkg.go.de
 
 Clone or download this repository then run `go install`, or run below:
 
-```go
+```sh
 go install github.com/sheepla/gofind@latest
 ```
 

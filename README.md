@@ -6,6 +6,11 @@ A command line [pkg.go.dev](pkg.go.dev) searcher
 
 Simply specify the keywords in the arguments e.g. package name (`template`), symbol name (`io.Reader`), multiple keywords (`json OR yaml`) etc.
 
+It can be output the result in JSON format by specifying the `-j`, `--json` option.
+
+By default, it searches for packages, but you can also search for symbols with the `-s`, `--symbol` option.
+
+
 ```
 Usage:
   gofind [OPTIONS] QUERY...
@@ -32,7 +37,7 @@ go install github.com/sheepla/gofind@latest
 
 ## License
 
-MIT
+[MIT](./LICENSE)
 
 ## Author
 

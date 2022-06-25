@@ -4,6 +4,8 @@ A command line [pkg.go.dev](pkg.go.dev) searcher
 
 ## Usage
 
+Simply specify the keywords in the arguments e.g. `io.Reader`, `json OR yaml` etc.
+
 ```
 Usage:
   gofind [OPTIONS] QUERY...
@@ -17,6 +19,8 @@ Application Options:
 Help Options:
   -h, --help     Show this help message
 ```
+
+To see examples of keywords to search for, check [search-help](https://pkg.go.dev/search-help) on pkg.go.dev.
 
 ## Installation
 

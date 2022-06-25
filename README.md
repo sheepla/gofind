@@ -1,6 +1,6 @@
 # 🔍 gofind
 
-A command line [pkg.go.dev](pkg.go.dev) searcher
+A command line [pkg.go.dev](https://pkg.go.dev) searcher
 
 ## Usage
 

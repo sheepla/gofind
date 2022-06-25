@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/jessevdk/go-flags"
+	"github.com/ktr0731/go-fuzzyfinder"
 	"github.com/sheepla/gofind/client"
 	"github.com/sheepla/gofind/ui"
 )
@@ -97,6 +98,10 @@ func run(cliArgs []string) (exitCode, error) {
 
 	_, err = ui.Find(*results)
 	if err != nil {
+		if errors.Is(fuzzyfinder.ErrAbort, err) {
+			return exitCodeOK, nil
+		}
+
 		return exitCodeFuzzyFinder, fmt.Errorf("an error occurred on fuzzyfinder: %w", err)
 	}
 

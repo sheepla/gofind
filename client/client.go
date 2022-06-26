@@ -71,11 +71,14 @@ func Search(param *Param) ([]Result, error) {
 			result.Link = clean(h2.Find("a").AttrOr("href", ""))
 		})
 
-		result.Description = clean(div.Find("p[data-test-id=snippet-synopsis]").Text())
+		if desc := div.Find("p[data-test-id=snippet-synopsis]"); desc != nil {
+			result.Description = clean(desc.Text())
+		}
 
-		license := div.Find("span[data-test-id=snippet-license] a")
-		result.LicenseLink = clean(license.AttrOr("href", ""))
-		result.License = clean(license.Text())
+		if license := div.Find("span[data-test-id=snippet-license] a"); license != nil {
+			result.LicenseLink = clean(license.AttrOr("href", ""))
+			result.License = clean(license.Text())
+		}
 
 		div.Find("div.SearchSnippet-infoLabel").Each(func(i int, label *goquery.Selection) {
 			result.Snippet = clean(label.Text())

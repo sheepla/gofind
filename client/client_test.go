@@ -33,12 +33,34 @@ func TestNewURL(t *testing.T) {
 
 //nolint:paralleltest
 func TestSearch(t *testing.T) {
-	_, err := client.Search(&client.Param{
+	results, err := client.Search(&client.Param{
 		Query:           "JSON",
 		Limit:           20,
 		SearchForSymbol: false,
 	})
 	if err != nil {
 		t.Errorf("An error occurred on Search func: %s", err)
+	}
+
+	for _, result := range results {
+		if result.Name == "" {
+			t.Error("name is empty")
+		}
+
+		if result.Link == "" {
+			t.Error("link is empty")
+		}
+
+		// if result.Description == "" {
+		// 	t.Error("description is empty")
+		// }
+
+		if result.License == "" {
+			t.Error("license is empty")
+		}
+
+		if result.LicenseLink == "" {
+			t.Error("link of license is empty")
+		}
 	}
 }

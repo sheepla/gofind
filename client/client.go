@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"path"
 	"regexp"
 	"strconv"
 	"strings"
@@ -47,7 +48,7 @@ func NewURL(param *Param) string {
 	return u.String()
 }
 
-func Search(param *Param) (*[]Result, error) {
+func Search(param *Param) ([]Result, error) {
 	res, err := http.Get(NewURL(param))
 	if err != nil {
 		return nil, fmt.Errorf("failed to get response: %w", err)
@@ -83,7 +84,7 @@ func Search(param *Param) (*[]Result, error) {
 		results = append(results, result)
 	})
 
-	return &results, nil
+	return results, nil
 }
 
 func clean(str string) string {
@@ -92,4 +93,8 @@ func clean(str string) string {
 	s = re.ReplaceAllString(s, " ")
 
 	return strings.TrimSpace(s)
+}
+
+func NewPageURL(link string) string {
+	return path.Join("https://pkg.go.dev", link)
 }

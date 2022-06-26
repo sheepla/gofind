@@ -28,7 +28,7 @@ const (
 	exitCodeErrArgs
 	exitCodeErrSearch
 	exitCodeErrJSON
-	exitCodeFuzzyFinder
+	exitCodeErrFuzzyFinder
 	exitCodeErrWebBrowser
 )
 
@@ -38,6 +38,7 @@ type options struct {
 	Limit           int  `short:"l" long:"limit" description:"Number of search result items limit" default:"20"`
 	Version         bool `short:"V" long:"version" description:"Show version"`
 	JSON            bool `short:"j" long:"json" description:"Output in JSON format"`
+	Open            bool `short:"o" long:"open" description:"Open the document URL in your web browser"`
 }
 
 var errNoArgs = errors.New("must require arguments")
@@ -51,6 +52,7 @@ func main() {
 	os.Exit(int(code))
 }
 
+// nolint:cyclop
 func run(cliArgs []string) (exitCode, error) {
 	var opts options
 	parser := flags.NewParser(&opts, flags.Default)
@@ -94,18 +96,22 @@ func run(cliArgs []string) (exitCode, error) {
 		return exitCodeOK, nil
 	}
 
-	_, err = ui.Find(*results)
+	idx, err := ui.Find(results)
 	if err != nil {
 		if errors.Is(fuzzyfinder.ErrAbort, err) {
 			return exitCodeOK, nil
 		}
 
-		return exitCodeFuzzyFinder, fmt.Errorf("an error occurred on fuzzyfinder: %w", err)
+		return exitCodeErrFuzzyFinder, fmt.Errorf("an error occurred on fuzzyfinder: %w", err)
 	}
 
-	// if err := ui.Open(&results[idx].Link); err != nil {
-	// 	return exitCodeErrWebBrowser, fmt.Errorf("failed to open the link: %w", err)
-	// }
+	if opts.Open {
+		if err := ui.Open(results[idx].Link); err != nil {
+			return exitCodeErrWebBrowser, fmt.Errorf("failed to open the link: %w", err)
+		}
+	}
+
+	fmt.Fprintln(os.Stdout, client.NewPageURL(results[idx].Link))
 
 	return exitCodeOK, nil
 }

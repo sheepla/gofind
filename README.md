@@ -1,6 +1,15 @@
+<div align="right">
+
+[![Release](https://github.com/sheepla/gofind/actions/workflows/release.yml/badge.svg)](https://github.com/sheepla/gofind/actions/workflows/release.yml)
+
+</div>
+
+<div align="center">
+
 # 🔍 gofind
 
 A command line [pkg.go.dev](https://pkg.go.dev) searcher
+</div>
 
 ## Usage
 

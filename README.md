@@ -9,6 +9,10 @@
 # 🔍 gofind
 
 A command line [pkg.go.dev](https://pkg.go.dev) searcher
+
+[![MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=blue&style=flat-square)](https://github.com/sheepla/gofind/blob/master/LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/sheepla/gofind?style=flat-square)](https://github.com/sheepla/gofind/releases/latest)
+
 </div>
 
 ## Usage

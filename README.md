@@ -42,11 +42,17 @@ To see examples of keywords to search for, check [search-help](https://pkg.go.de
 
 ## Installation
 
-Clone or download this repository then run `go install`, or run below:
+You can download the executable binaries from the latest page.
+
+> [![Latest Release](https://img.shields.io/github/v/release/sheepla/gofind?style=flat-square)](https://github.com/sheepla/gofind/releases/latest)
+
+To build from source, clone or download this repository then run `go install`, or run below:
 
 ```sh
 go install github.com/sheepla/gofind@latest
 ```
+
+Developing on `go1.18.3 linux/amd64`.
 
 ## License
 

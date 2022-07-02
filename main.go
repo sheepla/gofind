@@ -118,14 +118,11 @@ func run(cliArgs []string) (exitCode, error) {
 		return exitCodeOK, nil
 	}
 
-	pkgName := strings.Replace(
-		results[idx].Link,
-		"/",
-		"",
-		1,
-	)
-
-	fmt.Fprintln(os.Stdout, pkgName)
+	fmt.Fprintln(os.Stdout, pkgName(results[idx].Link))
 
 	return exitCodeOK, nil
+}
+
+func pkgName(link string) string {
+	return strings.Replace(link, "/", "", 1)
 }

@@ -39,6 +39,7 @@ type options struct {
 	Version         bool `short:"V" long:"version" description:"Show version"`
 	JSON            bool `short:"j" long:"json" description:"Output in JSON format"`
 	Open            bool `short:"o" long:"open" description:"Open the document URL in your web browser"`
+	URL             bool `short:"u" long:"url" description:"Output pkg.go.dev URL instead of output package name"`
 }
 
 var errNoArgs = errors.New("must require arguments")
@@ -52,7 +53,7 @@ func main() {
 	os.Exit(int(code))
 }
 
-// nolint:cyclop
+// nolint:cyclop,funlen
 func run(cliArgs []string) (exitCode, error) {
 	var opts options
 	parser := flags.NewParser(&opts, flags.Default)
@@ -111,7 +112,20 @@ func run(cliArgs []string) (exitCode, error) {
 		}
 	}
 
-	fmt.Fprintln(os.Stdout, client.NewPageURL(results[idx].Link))
+	if opts.URL {
+		fmt.Fprintln(os.Stdout, client.NewPageURL(results[idx].Link))
+
+		return exitCodeOK, nil
+	}
+
+	pkgName := strings.Replace(
+		results[idx].Link,
+		"/",
+		"",
+		1,
+	)
+
+	fmt.Fprintln(os.Stdout, pkgName)
 
 	return exitCodeOK, nil
 }

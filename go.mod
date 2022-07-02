@@ -6,14 +6,12 @@ require (
 	github.com/PuerkitoBio/goquery v1.8.0
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/ktr0731/go-fuzzyfinder v0.6.0
-	github.com/manifoldco/promptui v0.9.0
 	github.com/mattn/go-runewidth v0.0.13
 	github.com/toqueteos/webbrowser v1.2.0
 )
 
 require (
 	github.com/andybalholm/cascadia v1.3.1 // indirect
-	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
 	github.com/gdamore/encoding v1.0.0 // indirect
 	github.com/gdamore/tcell/v2 v2.4.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.0.3 // indirect

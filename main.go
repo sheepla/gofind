@@ -39,7 +39,7 @@ type options struct {
 	SearchForSymbol bool `short:"s" long:"symbol" description:"Search for symbol instead of package"`
 	Limit           int  `short:"l" long:"limit" description:"Number of search result items limit" default:"20"`
 	Version         bool `short:"V" long:"version" description:"Show version"`
-	JSON            bool `short:"j" long:"json" description:"Output in JSON format"`
+	JSON            bool `short:"j" long:"json" description:"Output search results in JSON format"`
 	Open            bool `short:"o" long:"open" description:"Open the document URL in your web browser"`
 	URL             bool `short:"u" long:"url" description:"Output pkg.go.dev URL instead of output package name"`
 	GoGet           bool `short:"g" long:"goget" description:"Run go get command to get the package that you selected"`

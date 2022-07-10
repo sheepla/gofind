@@ -45,7 +45,10 @@ type options struct {
 	GoGet           bool `short:"g" long:"goget" description:"Run go get command to get the package that you selected"`
 }
 
-var errNoArgs = errors.New("must require arguments")
+var (
+	errNoArgs       = errors.New("must require arguments")
+	errConflictOpts = errors.New("this option cannot be used at the same time")
+)
 
 func main() {
 	code, err := run(os.Args[1:])
@@ -81,6 +84,10 @@ func run(cliArgs []string) (exitCode, error) {
 
 	if len(args) == 0 {
 		return exitCodeErrArgs, errNoArgs
+	}
+
+	if opts.SearchForSymbol && opts.URL {
+		return exitCodeErrArgs, fmt.Errorf("%w (--symbol, --url)", errConflictOpts)
 	}
 
 	results, err := client.Search(&client.Param{

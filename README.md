@@ -20,10 +20,11 @@ A command line [pkg.go.dev](https://pkg.go.dev) searcher
 
 Simply specify the keywords in the arguments e.g. package name (`template`), symbol name (`io.Reader`), multiple keywords (`json OR yaml`) etc.
 
+To see examples of keywords to search for, check [search-help](https://pkg.go.dev/search-help) on pkg.go.dev.
+
 It can be output the result in JSON format by specifying the `-j`, `--json` option.
 
 By default, it searches for packages, but you can also search for symbols with the `-s`, `--symbol` option.
-
 
 ```
 Usage:
@@ -39,7 +40,7 @@ Help Options:
   -h, --help     Show this help message
 ```
 
-To see examples of keywords to search for, check [search-help](https://pkg.go.dev/search-help) on pkg.go.dev.
+When you select an element, the name of the package is output. You can also output the URL by specify the `-u`, `--url` option.
 
 ## Installation
 

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"os/exec"
 	"strings"
 
 	"github.com/jessevdk/go-flags"
@@ -30,6 +31,7 @@ const (
 	exitCodeErrJSON
 	exitCodeErrFuzzyFinder
 	exitCodeErrWebBrowser
+	exitCodeErrGoGet
 )
 
 // nolint:maligned
@@ -40,6 +42,7 @@ type options struct {
 	JSON            bool `short:"j" long:"json" description:"Output in JSON format"`
 	Open            bool `short:"o" long:"open" description:"Open the document URL in your web browser"`
 	URL             bool `short:"u" long:"url" description:"Output pkg.go.dev URL instead of output package name"`
+	GoGet           bool `short:"g" long:"goget" description:"Run go get command to get the package that you selected"`
 }
 
 var errNoArgs = errors.New("must require arguments")
@@ -118,11 +121,46 @@ func run(cliArgs []string) (exitCode, error) {
 		return exitCodeOK, nil
 	}
 
-	fmt.Fprintln(os.Stdout, pkgName(results[idx].Link))
+	pkg := pkgName(results[idx].Link)
+
+	if opts.GoGet {
+		cmd, args := buildGoGetCommand(pkg, "", false)
+		if err := execCommand(cmd, args); err != nil {
+			return exitCodeErrGoGet, fmt.Errorf("failed to get package: %w", err)
+		}
+	}
+
+	fmt.Fprintln(os.Stdout, pkg)
 
 	return exitCodeOK, nil
 }
 
 func pkgName(link string) string {
 	return strings.Replace(link, "/", "", 1)
+}
+
+func buildGoGetCommand(pkg string, version string, update bool) (string, []string) {
+	if version == "" {
+		version = "latest"
+	}
+
+	pkgWithVer := fmt.Sprintf("%s@%s", pkg, version)
+
+	if update {
+		return "go", []string{"get", "-v", "-u", pkgWithVer}
+	}
+
+	return "go", []string{"get", "-v", pkgWithVer}
+}
+
+func execCommand(command string, args []string) error {
+	cmd := exec.Command(command, args...)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("command execution error: %w", err)
+	}
+
+	return nil
 }

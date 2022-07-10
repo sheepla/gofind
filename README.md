@@ -9,12 +9,19 @@
 
 # 🔍 gofind
 
-A command line [pkg.go.dev](https://pkg.go.dev) searcher
+*A command line [pkg.go.dev](https://pkg.go.dev) searcher and `go get` helper*
 
 [![MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=blue&style=flat-square)](https://github.com/sheepla/gofind/blob/master/LICENSE)
 [![Latest Release](https://img.shields.io/github/v/release/sheepla/gofind?style=flat-square)](https://github.com/sheepla/gofind/releases/latest)
 
 </div>
+
+## Features
+
+- [x] Quickly search Go packages or symbol
+- [x] Easily get package that you selected
+- [x] Search results can be output in JSON format
+- [x] Can be open the document page in your web browser
 
 ## Usage
 
@@ -26,7 +33,10 @@ Application Options:
   -s, --symbol   Search for symbol instead of package
   -l, --limit=   Number of search result items limit (default: 20)
   -V, --version  Show version
-  -j, --json     Output in JSON format
+  -j, --json     Output search results in JSON format
+  -o, --open     Open the document URL in your web browser
+  -u, --url      Output pkg.go.dev URL instead of output package name
+  -g, --goget    Run go get command to get the package that you selected
 
 Help Options:
   -h, --help     Show this help message
@@ -34,13 +44,14 @@ Help Options:
 
 Simply specify the keywords in the arguments e.g. package name (`template`), symbol name (`io.Reader`), multiple keywords (`json OR yaml`) etc.
 
-To see examples of keywords to search for, check [search-help](https://pkg.go.dev/search-help) on pkg.go.dev.
+> **NOTE**:
+> To see examples of keywords to search for, check [search-help](https://pkg.go.dev/search-help) on pkg.go.dev.
 
 It can be output the result in JSON format by specifying the `-j`, `--json` option.
 
 By default, it searches for packages, but you can also search for symbols with the `-s`, `--symbol` option.
 
-When you select an element, the name of the package is output. You can also output the URL by specify the `-u`, `--url` option.
+When you select an item, the name of the package is output. You can also output the URL by specify the `-u`, `--url` option.
 
 ## Installation
 

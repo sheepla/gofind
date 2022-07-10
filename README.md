@@ -42,7 +42,7 @@ Help Options:
   -h, --help     Show this help message
 ```
 
-Simply specify the keywords in the arguments e.g. package name (`template`), symbol name (`io.Reader`), multiple keywords (`json OR yaml`) etc.
+Simply specifying the keywords in the arguments e.g. package name (`template`), symbol name (`io.Reader`), multiple keywords (`json OR yaml`) etc.
 
 > **NOTE**:
 > To see examples of keywords to search for, check [search-help](https://pkg.go.dev/search-help) on pkg.go.dev.
@@ -51,7 +51,7 @@ It can be output the result in JSON format by specifying the `-j`, `--json` opti
 
 By default, it searches for packages, but you can also search for symbols with the `-s`, `--symbol` option.
 
-When you select an item, the name of the package is output. You can also output the URL by specify the `-u`, `--url` option.
+When you select an item, the name of the package is output. You can also output the URL by specifying the `-u`, `--url` option.
 
 ## Installation
 

@@ -135,6 +135,8 @@ func run(cliArgs []string) (exitCode, error) {
 		if err := execCommand(cmd, args); err != nil {
 			return exitCodeErrGoGet, fmt.Errorf("failed to get package: %w", err)
 		}
+
+		return exitCodeOK, nil
 	}
 
 	fmt.Fprintln(os.Stdout, pkg)
